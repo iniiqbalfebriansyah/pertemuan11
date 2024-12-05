@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Sederhana</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        .calculator {
+            display: inline-block;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Kalkulator Sederhana</h1>
+    <div class="calculator">
+        <form id="calculatorForm">
+            <input type="number" id="angka1" placeholder="Masukkan angka pertama" required>
+            <input type="number" id="angka2" placeholder="Masukkan angka kedua" required>
+            <select id="operator">
+                <option value="tambah">Tambah (+)</option>
+                <option value="kurang">Kurang (-)</option>
+                <option value="kali">Kali (×)</option>
+                <option value="bagi">Bagi (÷)</option>
+            </select>
+            <button type="button" onclick="hitung()">Hitung</button>
+        </form>
+        <div class="result" id="hasil"></div>
+    </div>
+
+    <script>
+        // Fungsi untuk menghitung hasil
+        function hitung() {
+            const angka1 = parseFloat(document.getElementById("angka1").value);
+            const angka2 = parseFloat(document.getElementById("angka2").value);
+            const operator = document.getElementById("operator").value;
+
+            // Validasi input
+            if (isNaN(angka1) || isNaN(angka2)) {
+                document.getElementById("hasil").innerText = "Masukkan angka yang valid!";
+                return;
+            }
+
+            let hasil;
+            switch (operator) {
+                case "tambah":
+                    hasil = angka1 + angka2;
+                    break;
+                case "kurang":
+                    hasil = angka1 - angka2;
+                    break;
+                case "kali":
+                    hasil = angka1 * angka2;
+                    break;
+                case "bagi":
+                    if (angka2 === 0) {
+                        document.getElementById("hasil").innerText = "Pembagian dengan nol tidak diperbolehkan!";
+                        return;
+                    }
+                    hasil = angka1 / angka2;
+                    break;
+                default:
+                    document.getElementById("hasil").innerText = "Operator tidak valid!";
+                    return;
+            }
+
+            // Menampilkan hasil
+            document.getElementById("hasil").innerText = `Hasil: ${hasil}`;
+        }
+    </script>
+</body>
+</html>
